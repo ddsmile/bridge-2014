@@ -1,0 +1,71 @@
+---
+title: "Week 8 R Assignment"
+author: "Xingjia Wu"
+output: html_document
+---
+
+1 Use the rbinom() function with probability 0.5 to simulate a string of 100 coin flips.
+
+```{r}
+coin <- rbinom(100, 1, 0.5)
+```
+
+2 Test whether there is at least seven in a row
+
+```{r}
+SevenInRow <- FALSE
+count <-0
+total <- 8
+for (i in 1:94){
+  total <- sum(coin[i:(i+6)])
+  if (total == 7 | total == 0){
+    count <- count + 1
+  }
+  total <- 8
+}
+if (count>0){
+  SevenInRow <-TRUE
+}
+count
+SevenInRow
+```
+
+3 Enclose the codes in a loop
+```{r}
+p.7inrow <- function (toss){
+  count <-0
+  for (i in 1:toss){
+    coin <- rbinom(100, 1, 0.5)
+    total <- 8
+    for (i in 1:94){
+      total <- sum(coin[i:(i+6)])
+      if (total == 7 | total == 0){
+        count <- count + 1
+      }
+      total <- 8
+    }
+  }
+  pb <- count/(toss*100)
+  return (pb)    
+}
+```
+Run 100-toss, show probability
+```{r}
+p.7inrow(1)
+```
+4
+Run 10 times
+```{r}
+p.7inrow(10)
+p.7inrow(100)
+p.7inrow(1000)
+p.7inrow(10000)
+```
+The more trial, the more accurate that the probability gets close to the theoretical value. 
+```{r}
+system.time(p.7inrow(10))
+system.time(p.7inrow(100))
+system.time(p.7inrow(1000))
+system.time(p.7inrow(10000))
+```
+I feel a little slowdown when running 1000 times. Running 10000 times took more than 5 seconds. I tested on running 100,000 times and it took 55 seconds. 

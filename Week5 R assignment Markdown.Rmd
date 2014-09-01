@@ -1,0 +1,58 @@
+Week 5 R assignment
+========================================================
+
+1
+
+It would be more efficient to use pre-allocating than appending in R, especially in large data. Appending is to add element into the exist source. When the data is large, the memory manager in R works poorly and the code will run slowly. The option is to preallocate the space for the data needed to append. This step will sidestep the problems with the memory manager.
+
+Code for appending vectors
+
+```{r}
+va <- numeric()
+va <- c(va,0)
+va
+```
+
+Code for preallocating vectors
+
+```{r}
+vp <- vector(mode="numeric", length = 3)
+vp
+
+```
+
+Code for appending dataframes
+```{r}
+x <- c(0, 1, 2)
+y <- c(TRUE, FALSE, TRUE)
+dfa <- data.frame(x, y)
+z <- c(3, 4, 5)
+dfa <- cbind(dfa, z)
+dfa
+```
+Code for preallocating dataframes
+```{r}
+dfp <- data.frame(Col1=numeric(3), Col2=character(3), Col3=factor(3, levels=c("High", "Medium", "Low")))
+dfp
+```
+Code for appending lists
+```{r}
+la <- list(1, 2, 3)
+la[[4]] <- c(3,4)
+la
+```
+Code for preallocating lists
+```{r}
+lp <- vector (mode="list", length = 3)
+lp
+
+```
+
+2
+Load MASS package, choose a few columns, and create a new dataframe. 
+```{r}
+require("MASS")
+newBoston <- data.frame("Crime rate" = Boston$crim, "Rooms per dwelling" = Boston$rm, "Distance to centres" = Boston$dis)
+head(newBoston)
+```
+

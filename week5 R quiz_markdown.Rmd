@@ -1,0 +1,51 @@
+Week 5 R Quiz
+
+1
+Create five matrices
+```{r}
+(A <- matrix(c(1,-1,-1,-1), nrow=2))
+(B <- matrix(c(2, -1, 3, -2), nrow=2))
+(C <- matrix(c(1, 0, 0, 0), nrow=2))
+(D <- matrix(c(0, 1, 0, 1, 0, 0, 0, 0, 1), nrow=3))
+(E <- matrix(c(1, 0, 0, 0, 0, 1, 0, 1, 0),nrow=3))
+```
+
+2
+Determine if idempotent matrix
+(Only C is idempotent matrix)
+
+```{r}
+A %*% A == A            #FALSE
+B %*% B == B            #FALSE
+C %*% C == C            #TRUE
+D %*% D == D            #FALSE
+E %*% E == E            #FALSE 
+```
+
+3
+Determine if orthogonal matrix
+(Only D and E are orthogonal matrices)
+```{r}
+solve(A) == t(A)        #FALSE
+solve(B) == t(B)        #FALSE
+# run solve(C) causes error, which means no inverse matrix
+
+```
+```{r}
+solve(D) == t(D)        #TRUE
+solve(E) == t(E)        #TRUE
+```
+
+4
+Illustrate the creation of a list containing a vector, a matrix, an array, a dataframe, and another list
+```{r}
+vec <- c(1,2,3)      
+x <- 1:3
+y <- 5:7
+df <- data.frame(x, y)
+lst1 <- list(1,2,3)
+array1 <- array(c(1,3,5,7,9,11,13,15), dim = c(2, 2, 2))
+theList <- list(vec, A, array1, df, lst1)
+theList
+```
+
